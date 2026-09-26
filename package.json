@@ -1,74 +1,103 @@
 {
-  "name": "@vibersmoon/nexalink",
-  "version": "0.3.0",
-  "description": "Unofficial WhatsApp Web automation library for Node.js. Not affiliated with Meta or WhatsApp.",
-  "main": "dist/index.cjs",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "exports": {
-    ".": {
-      "import": {
-        "types": "./dist/index.d.ts",
-        "default": "./dist/index.js"
-      },
-      "require": {
-        "types": "./dist/index.d.cts",
-        "default": "./dist/index.cjs"
-      }
-    }
-  },
+  "name": "baileys",
   "type": "module",
-  "files": [
-    "dist",
-    "README.md",
-    "LICENSE",
-    "CHANGELOG.md",
-    "SECURITY.md"
-  ],
-  "scripts": {
-    "dev": "tsx watch src/index.ts",
-    "build": "tsup src/index.ts --format cjs,esm --dts --clean",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage",
-    "lint": "eslint src tests",
-    "format": "prettier --write \"src/**/*.ts\" \"tests/**/*.ts\"",
-    "typecheck": "tsc --noEmit",
-    "clean": "rm -rf dist"
-  },
+  "version": "6.7.24",
+  "description": "A WebSockets library for interacting with WhatsApp Web",
   "keywords": [
     "whatsapp",
-    "automation",
-    "bot",
-    "unofficial",
-    "web-api"
+    "automation"
   ],
-  "author": "Akram",
+  "homepage": "https://github.com/WhiskeySockets/Baileys/",
+  "repository": {
+    "url": "git@github.com:WhiskeySockets/Baileys.git"
+  },
   "license": "MIT",
+  "author": "Rajeh Taher",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib/**/*",
+    "WAProto/**/*",
+    "engine-requirements.js"
+  ],
+  "scripts": {
+    "build:all": "npm run build && npm run build:docs",
+    "build:docs": "typedoc",
+    "build": "tsc -P tsconfig.build.json && tsc-esm-fix --tsconfig=tsconfig.build.json --ext=.js",
+    "changelog:last": "conventional-changelog -p angular -r 2",
+    "changelog:preview": "conventional-changelog -p angular -u",
+    "changelog:update": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
+    "example": "tsx ./Example/example.ts",
+    "gen:protobuf": "sh WAProto/GenerateStatics.sh",
+    "format": "prettier --write \"src/**/*.{ts,js,json,md}\"",
+    "lint": "tsc && eslint src --ext .js,.ts",
+    "lint:fix": "npm run format && npm run lint --fix",
+    "prepack": "npm run build",
+    "prepare": "npm run build",
+    "preinstall": "node ./engine-requirements.js",
+    "release": "release-it",
+    "test": "node --experimental-vm-modules ./node_modules/.bin/jest"
+  },
   "dependencies": {
-    "pino": "^9.6.0",
-    "qrcode-terminal": "^0.12.0",
-    "ws": "^8.18.1",
-    "zod": "^3.23.8"
+    "@cacheable/node-cache": "^1.4.0",
+    "@hapi/boom": "^9.1.3",
+    "async-mutex": "^0.5.0",
+    "axios": "^1.6.0",
+    "libsignal": "git+https://github.com/whiskeysockets/libsignal-node",
+    "music-metadata": "^11.7.0",
+    "pino": "^9.6",
+    "protobufjs": "^7.2.4",
+    "ws": "^8.13.0"
   },
   "devDependencies": {
-    "@types/node": "^22.10.5",
-    "@types/qrcode-terminal": "^0.12.2",
-    "@types/ws": "^8.5.10",
-    "@typescript-eslint/eslint-plugin": "^8.15.0",
-    "@typescript-eslint/parser": "^8.15.0",
-    "eslint": "^9.15.0",
-    "eslint-config-prettier": "^9.1.0",
-    "prettier": "^3.3.3",
-    "tsup": "^8.4.0",
-    "tsx": "^4.19.2",
-    "typescript": "^5.6.3",
-    "vitest": "^4.1.11"
+    "@eslint/eslintrc": "^3.3.1",
+    "@eslint/js": "^9.31.0",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^16.0.0",
+    "@types/ws": "^8.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.32.0",
+    "@typescript-eslint/parser": "^8.32.0",
+    "@whiskeysockets/eslint-config": "github:whiskeysockets/eslint-config",
+    "conventional-changelog-cli": "^2.2.2",
+    "esbuild-register": "^3.6.0",
+    "eslint": "^9.31.0",
+    "eslint-config-prettier": "^10.1.2",
+    "eslint-plugin-prettier": "^5.4.0",
+    "jest": "^30.0.5",
+    "jimp": "^1.6.0",
+    "jiti": "^2.4.2",
+    "json": "^11.0.0",
+    "link-preview-js": "^3.0.0",
+    "open": "^8.4.2",
+    "prettier": "^3.5.3",
+    "protobufjs-cli": "^1.1.3",
+    "release-it": "^15.10.3",
+    "ts-jest": "^29.4.0",
+    "tsc-esm-fix": "^3.1.2",
+    "tsx": "^4.20.3",
+    "typedoc": "^0.27.9",
+    "typedoc-plugin-markdown": "4.4.2",
+    "typescript": "^5.8.2"
   },
+  "peerDependencies": {
+    "audio-decode": "^2.1.3",
+    "jimp": "^1.6.0",
+    "link-preview-js": "^3.0.0",
+    "sharp": "*"
+  },
+  "peerDependenciesMeta": {
+    "audio-decode": {
+      "optional": true
+    },
+    "jimp": {
+      "optional": true
+    },
+    "link-preview-js": {
+      "optional": true
+    }
+  },
+  "packageManager": "yarn@4.9.2",
   "engines": {
     "node": ">=20.0.0"
-  },
-  "publishConfig": {
-    "access": "public"
   }
 }
