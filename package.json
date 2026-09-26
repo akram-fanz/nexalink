@@ -1,7 +1,7 @@
 {
-  "name": "baileys",
+  "name": "nexalink",
   "type": "module",
-  "version": "6.7.24",
+  "version": "1.0.0",
   "description": "A WebSockets library for interacting with WhatsApp Web",
   "keywords": [
     "whatsapp",
