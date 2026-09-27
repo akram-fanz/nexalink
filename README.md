@@ -1298,7 +1298,7 @@ sock.ws.on('CB:edge_routing,id:abcd,routing_info', (node: BinaryNode) => { })
 ```
 
 # License
-Copyright (c) 2025 Rajeh Taher/Vibersmoon
+Copyright (c) 2025 Akram Fanz/Vibersmoon
 
 Licensed under the MIT License:
 Permission is hereby granted, free of charge, to any person obtaining a copy
